@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MovementStats" load_steps=2 format=3 uid="uid://d0ng05yy6gpoy"]
+
+[ext_resource type="Script" uid="uid://blrnkeh7u2fuo" path="res://scripts/resources/player/movement_stats.gd" id="1_adiga"]
+
+[resource]
+script = ExtResource("1_adiga")
+base_walk_speed = 5.0
+max_walk_speed = 8.0
+base_run_speed = 8.0
+max_run_speed = 12.0
+base_jump_strength = 5.0
+base_jump_stamina_cost = 0.0
+max_jump_strength = 10.0
+metadata/_custom_type_script = "uid://blrnkeh7u2fuo"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RunSpeed" load_steps=3 format=3 uid="uid://db8a8ak5rtvfi"]
+
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_fxr0b"]
+[ext_resource type="Script" uid="uid://dlt36xgxgncar" path="res://scripts/resources/skills/run_speed.gd" id="2_cdf48"]
+
+[resource]
+script = ExtResource("2_cdf48")
+player_stats = ExtResource("1_fxr0b")
+rarity = 2
+value = 15.0
+metadata/_custom_type_script = "uid://dlt36xgxgncar"

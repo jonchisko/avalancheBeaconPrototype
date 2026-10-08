@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShovelSpeed" load_steps=3 format=3 uid="uid://dmclp6nagyffd"]
+
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_4ptip"]
+[ext_resource type="Script" uid="uid://csqhnroldy1f0" path="res://scripts/resources/skills/shovel_speed.gd" id="1_5xc8w"]
+
+[resource]
+script = ExtResource("1_5xc8w")
+player_stats = ExtResource("1_4ptip")
+rarity = 2
+value = 15.0
+metadata/_custom_type_script = "uid://csqhnroldy1f0"

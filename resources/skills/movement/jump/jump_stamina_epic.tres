@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="JumpStamina" load_steps=3 format=3 uid="uid://b4yb51hhmur0j"]
+
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_ebx67"]
+[ext_resource type="Script" uid="uid://cxcpkvbhsa05i" path="res://scripts/resources/skills/jump_stamina.gd" id="2_55p7x"]
+
+[resource]
+script = ExtResource("2_55p7x")
+player_stats = ExtResource("1_ebx67")
+rarity = 2
+value = 15.0
+metadata/_custom_type_script = "uid://cxcpkvbhsa05i"

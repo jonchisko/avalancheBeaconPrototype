@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StaminaRegen" load_steps=3 format=3 uid="uid://c2kfaowq5sqta"]
+
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_7pmd5"]
+[ext_resource type="Script" uid="uid://bkahdcm6vlhq7" path="res://scripts/resources/skills/stamina_regen.gd" id="2_6ofvc"]
+
+[resource]
+script = ExtResource("2_6ofvc")
+player_stats = ExtResource("1_7pmd5")
+rarity = 2
+value = 15.0
+metadata/_custom_type_script = "uid://bkahdcm6vlhq7"

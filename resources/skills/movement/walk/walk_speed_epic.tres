@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WalkSpeed" load_steps=3 format=3 uid="uid://cp16q2ji85fpl"]
+
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_lwj4s"]
+[ext_resource type="Script" uid="uid://bewe74cncdxgh" path="res://scripts/resources/skills/walk_speed.gd" id="2_0s8ro"]
+
+[resource]
+script = ExtResource("2_0s8ro")
+player_stats = ExtResource("1_lwj4s")
+rarity = 2
+value = 15.0
+metadata/_custom_type_script = "uid://bewe74cncdxgh"

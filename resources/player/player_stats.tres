@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=6 format=3 uid="uid://c7p3jvh0ea7c7"]
+
+[ext_resource type="Script" uid="uid://byxmdl04s28ve" path="res://scripts/resources/player/player_stats.gd" id="1_oupy4"]
+[ext_resource type="Resource" uid="uid://d0ng05yy6gpoy" path="res://resources/player/movement_stats.tres" id="1_v36me"]
+[ext_resource type="Resource" uid="uid://co705ch1r5t8j" path="res://resources/player/stamina_stats.tres" id="3_pqd27"]
+[ext_resource type="Resource" uid="uid://bgfelme1gdgdk" path="res://resources/player/shovel_stats.tres" id="4_m78tk"]
+[ext_resource type="Resource" uid="uid://c7k1u4npcybgr" path="res://resources/player/probe_stats.tres" id="5_dx5k8"]
+
+[resource]
+script = ExtResource("1_oupy4")
+movement_stats = ExtResource("1_v36me")
+stamina_stats = ExtResource("3_pqd27")
+tool_stats = {
+0: ExtResource("4_m78tk"),
+1: ExtResource("5_dx5k8")
+}
+metadata/_custom_type_script = "uid://byxmdl04s28ve"

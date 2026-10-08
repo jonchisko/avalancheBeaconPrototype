@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ConsumableBar" load_steps=3 format=3 uid="uid://mgvkge1kqrup"]
+
+[ext_resource type="Script" uid="uid://chrjvcjcxvhtl" path="res://scripts/resources/consumables/consumable_bar.gd" id="1_veh6x"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fbxho"]
+size = Vector3(0.04, 0.02, 0.1)
+
+[resource]
+script = ExtResource("1_veh6x")
+consumable_type = 1
+duration = 5.0
+value = 2.0
+consumable_object = SubResource("BoxMesh_fbxho")
+consumable_name = "Frutabela"
+description = "Frutabela is a fruity bar, originating from Slovenia. Usually eaten during or after sport activities. It increases stamina regeneration."
+metadata/_custom_type_script = "uid://chrjvcjcxvhtl"

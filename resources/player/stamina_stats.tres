@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="StaminaStats" load_steps=2 format=3 uid="uid://co705ch1r5t8j"]
+
+[ext_resource type="Script" uid="uid://icqtaxycxdcb" path="res://scripts/resources/player/stamina_stats.gd" id="1_1kl46"]
+
+[resource]
+script = ExtResource("1_1kl46")
+metadata/_custom_type_script = "uid://icqtaxycxdcb"

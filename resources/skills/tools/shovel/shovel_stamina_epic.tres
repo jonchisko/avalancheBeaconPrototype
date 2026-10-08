@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShovelStamina" load_steps=3 format=3 uid="uid://ck3n12mly3ig6"]
+
+[ext_resource type="Script" uid="uid://c05txvmt6cc5h" path="res://scripts/resources/skills/shovel_stamina.gd" id="1_hb5iu"]
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_vmty3"]
+
+[resource]
+script = ExtResource("1_hb5iu")
+player_stats = ExtResource("1_vmty3")
+rarity = 2
+value = 15.0
+metadata/_custom_type_script = "uid://c05txvmt6cc5h"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Stamina" load_steps=3 format=3 uid="uid://cn040bkacaw06"]
+
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_6bovf"]
+[ext_resource type="Script" uid="uid://e2xmkigf6gym" path="res://scripts/resources/skills/stamina.gd" id="2_j66kh"]
+
+[resource]
+script = ExtResource("2_j66kh")
+player_stats = ExtResource("1_6bovf")
+rarity = 2
+value = 15.0
+metadata/_custom_type_script = "uid://e2xmkigf6gym"

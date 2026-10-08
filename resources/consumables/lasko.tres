@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ConsumableDrink" load_steps=3 format=3 uid="uid://dxibpowwhwhv7"]
+
+[ext_resource type="Script" uid="uid://mnob7uefajhc" path="res://scripts/resources/consumables/consumable_drink.gd" id="3_hm6d0"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ae1sv"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.2
+
+[resource]
+script = ExtResource("3_hm6d0")
+value = 2.5
+consumable_object = SubResource("CylinderMesh_ae1sv")
+consumable_name = "Laško"
+description = "The one and only, Zlatorog, the green Laško, one of the two famous large Slovenian breweries (the other being Union). It restores some of your Stamina but"
+metadata/_custom_type_script = "uid://mnob7uefajhc"

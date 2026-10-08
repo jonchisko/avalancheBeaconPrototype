@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProbeStamina" load_steps=3 format=3 uid="uid://r17anijb6yfj"]
+
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="1_fhhmv"]
+[ext_resource type="Script" uid="uid://bppsuolj3ospt" path="res://scripts/resources/skills/probe_stamina.gd" id="1_sjeaj"]
+
+[resource]
+script = ExtResource("1_sjeaj")
+player_stats = ExtResource("1_fhhmv")
+rarity = 1
+value = 10.0
+metadata/_custom_type_script = "uid://bppsuolj3ospt"
