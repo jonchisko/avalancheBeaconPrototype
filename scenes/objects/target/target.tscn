@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgdbeiuqp2ijb"]
+
+[ext_resource type="Script" uid="uid://c7tmb4tg7plw0" path="res://scripts/objects/target/target.gd" id="1_hy0dh"]
+[ext_resource type="PackedScene" uid="uid://clfgxb1ohilhd" path="res://scenes/components/interactable.tscn" id="2_favqd"]
+[ext_resource type="Script" uid="uid://c4o213s2845a0" path="res://scripts/objects/target/box_mesh.gd" id="2_h17kd"]
+[ext_resource type="PackedScene" uid="uid://dc7xy1vrycyxd" path="res://scenes/components/player_detector.tscn" id="2_xb3fe"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_buuo4"]
+radius = 1.5492339
+
+[sub_resource type="BoxMesh" id="BoxMesh_p4j1q"]
+size = Vector3(1, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_favqd"]
+transparency = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_hy0dh"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2npn"]
+transparency = 1
+albedo_color = Color(1, 0.92066664, 0.32, 1)
+
+[node name="Target" type="Node3D" groups=["RadioTransmitter"]]
+script = ExtResource("1_hy0dh")
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_favqd")]
+parent = NodePath("..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3301894, 0)
+shape = SubResource("SphereShape3D_buuo4")
+
+[node name="PlayerDetector" parent="." instance=ExtResource("2_xb3fe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3301894, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+shape = SubResource("SphereShape3D_buuo4")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_p4j1q")
+surface_material_override/0 = SubResource("StandardMaterial3D_favqd")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7249911, 0)
+layers = 2
+mesh = SubResource("BoxMesh_hy0dh")
+skeleton = NodePath("../BaseMesh")
+surface_material_override/0 = SubResource("StandardMaterial3D_r2npn")
+script = ExtResource("2_h17kd")
+tween_time = 1.2
+height_offset = 0.6
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BoxMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013466835, 0)
+light_color = Color(0.93, 0.911865, 0.5673, 1)
+omni_range = 2.0
+omni_attenuation = 0.5
+
+[connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
+[connection signal="area_entered" from="PlayerDetector" to="." method="_on_player_detector_area_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="_on_player_detector_area_exited"]

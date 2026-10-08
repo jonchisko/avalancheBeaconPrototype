@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://hbsfboipk6ix"]
+
+[ext_resource type="Script" uid="uid://rwktexottbel" path="res://scripts/objects/beacon/beacon.gd" id="1_ybmbx"]
+[ext_resource type="AudioStream" uid="uid://dhpyj4nvn5vto" path="res://assets/sfx/beacon_sound.wav" id="2_eivfe"]
+
+[node name="Beacon" type="Node3D"]
+script = ExtResource("1_ybmbx")
+
+[node name="DistanceRecalculationTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="SoundEffectTimer" type="Timer" parent="."]
+
+[node name="BeaconFindStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_eivfe")
+
+[connection signal="timeout" from="DistanceRecalculationTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SoundEffectTimer" to="." method="_on_sound_effect_timer_timeout"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://75p2o71340ll"]
+
+[ext_resource type="Script" uid="uid://bg8bpiocv711x" path="res://scripts/components/look_around_component.gd" id="1_wwpsl"]
+
+[node name="LookAroundComponent" type="Node"]
+script = ExtResource("1_wwpsl")

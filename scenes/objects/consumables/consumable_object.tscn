@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl0eydhud8q2r"]
+
+[ext_resource type="Script" uid="uid://cb4gexump1hv5" path="res://scripts/objects/consumable/consumable_object.gd" id="1_keo8b"]
+
+[node name="ConsumableObject" type="Node3D"]
+script = ExtResource("1_keo8b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]

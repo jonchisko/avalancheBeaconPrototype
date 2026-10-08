@@ -1,0 +1,213 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnu8d3n0yymiq"]
+
+[ext_resource type="Script" uid="uid://ch5xciu0yud78" path="res://scripts/objects/tools/probe/probe_main.gd" id="1_dkpsj"]
+[ext_resource type="Script" uid="uid://buetf4kyp26u3" path="res://scripts/objects/tools/probe/probe_controller.gd" id="2_af2jj"]
+[ext_resource type="PackedScene" uid="uid://xfunyextmabr" path="res://scenes/ui/tool/tool_cooldown_icon.tscn" id="3_af2jj"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dkpsj"]
+radius = 0.05
+radial_segments = 32
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkpsj"]
+radius = 0.2709961
+
+[sub_resource type="Animation" id="Animation_wleag"]
+resource_name = "probe_use"
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.6, -0.4), Vector3(0, 0.6, -0.6), Vector3(0, -0.6, -0.6), Vector3(0, 0.6, -0.6), Vector3(0, 0.6, -0.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.0471976, 0, 0), Vector3(-3.1415927, 0, 0), Vector3(-3.1415927, 0, 0), Vector3(-3.1415927, 0, 0), Vector3(-1.0471976, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/ProbeDetector/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375, 0.4, 0.6, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_griu5"]
+resource_name = "probe_ready"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.7853982, 0, 0), Vector3(-1.0471976, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.4, -0.2), Vector3(0, 0.6, -0.4)]
+}
+
+[sub_resource type="Animation" id="Animation_dkpsj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/ProbeDetector/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eufbv"]
+_data = {
+&"RESET": SubResource("Animation_dkpsj"),
+&"probe_ready": SubResource("Animation_griu5"),
+&"probe_use": SubResource("Animation_wleag")
+}
+
+[node name="ProbeMain" type="Node3D"]
+script = ExtResource("1_dkpsj")
+
+[node name="ProbeController" type="Node" parent="."]
+script = ExtResource("2_af2jj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_dkpsj")
+
+[node name="ProbeDetector" type="Area3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/ProbeDetector"]
+shape = SubResource("CapsuleShape3D_dkpsj")
+disabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eufbv")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HitDisplay" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/HitDisplay"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Target hit [depth: 1m] "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HitLabelTimer" type="Timer" parent="CanvasLayer/HitDisplay"]
+unique_name_in_owner = true
+
+[node name="ToolCooldown" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_right = 80.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ToolCooldown"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ToolCooldownIcon" parent="CanvasLayer/ToolCooldown/MarginContainer" instance=ExtResource("3_af2jj")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[connection signal="area_entered" from="MeshInstance3D/ProbeDetector" to="ProbeController" method="_on_probe_detector_area_entered"]
+[connection signal="timeout" from="CanvasLayer/HitDisplay/HitLabelTimer" to="." method="_on_hit_label_timer_timeout"]

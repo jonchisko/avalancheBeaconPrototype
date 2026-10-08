@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bosmksn3vuwrs"]
+
+[ext_resource type="Script" uid="uid://cpce8jq1cw0c1" path="res://scripts/managers/skill/skill_manager.gd" id="1_lkgul"]
+
+[node name="SkillManager" type="Node"]
+script = ExtResource("1_lkgul")
+all_possible_skills = null
+rerolls = null

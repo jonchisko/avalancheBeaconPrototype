@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://p3kp56pit3r1"]
+
+[ext_resource type="Script" uid="uid://e8j3h25bt3q3" path="res://scripts/ui/beacon/signal_label_ui.gd" id="1_h6jh1"]
+
+[node name="SignalLabelUi" type="MarginContainer"]
+script = ExtResource("1_h6jh1")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "100"
+horizontal_alignment = 1

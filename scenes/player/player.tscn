@@ -1,0 +1,139 @@
+[gd_scene load_steps=22 format=3 uid="uid://dcxfyohal2rh"]
+
+[ext_resource type="Script" uid="uid://dvk8wt0d40e3v" path="res://scripts/player/player.gd" id="1_8afob"]
+[ext_resource type="PackedScene" uid="uid://bsni3st1k47w8" path="res://scenes/components/input_component.tscn" id="2_gmlin"]
+[ext_resource type="PackedScene" uid="uid://75p2o71340ll" path="res://scenes/components/look_around_component.tscn" id="2_p47bc"]
+[ext_resource type="PackedScene" uid="uid://bouf2p1aqqp44" path="res://scenes/components/movement_component.tscn" id="3_lvxji"]
+[ext_resource type="PackedScene" uid="uid://7h8djpp0fgmr" path="res://scenes/components/gravity_component.tscn" id="4_lvxji"]
+[ext_resource type="PackedScene" uid="uid://hbsfboipk6ix" path="res://scenes/objects/beacon/beacon.tscn" id="6_0owmy"]
+[ext_resource type="PackedScene" uid="uid://b6iit8278lo1u" path="res://scenes/components/StaminaComponent.tscn" id="6_h17s1"]
+[ext_resource type="PackedScene" uid="uid://bsmkebqwchu77" path="res://scenes/components/interactor.tscn" id="7_5gtgg"]
+[ext_resource type="PackedScene" uid="uid://cksssv1lm3xgf" path="res://scenes/ui/beacon/beacon_ui.tscn" id="7_qek5x"]
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="8_fm80t"]
+[ext_resource type="PackedScene" uid="uid://dbpbukkfcgjw7" path="res://scenes/ui/hud/interactable_text_ui.tscn" id="8_qek5x"]
+[ext_resource type="PackedScene" uid="uid://c6g1loek7f5ol" path="res://scenes/components/consume_component.tscn" id="8_ugbui"]
+[ext_resource type="PackedScene" uid="uid://bc2a2k6l5pyd5" path="res://scenes/managers/inventory/inventory_controller.tscn" id="9_fcs02"]
+[ext_resource type="PackedScene" uid="uid://ih31p27a2a11" path="res://scenes/managers/consumable_object_controller.tscn" id="10_fcs02"]
+[ext_resource type="PackedScene" uid="uid://dhp2h7ldm23n6" path="res://scenes/ui/inventory/inventory_ui.tscn" id="14_myrg7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+radius = 0.34
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sh265"]
+albedo_color = Color(0.79, 0.12640002, 0.40289992, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+material = SubResource("StandardMaterial3D_sh265")
+radius = 0.35
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h17s1"]
+albedo_color = Color(0.1175, 0.3055, 0.47, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gtgg"]
+albedo_color = Color(1, 0.7, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0owmy"]
+radius = 0.8442383
+height = 2.432129
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("movement_component", "gravity_component", "look_around_component", "stamina_component", "inventory_controler", "interactor")]
+script = ExtResource("1_8afob")
+movement_component = NodePath("MovementComponent")
+gravity_component = NodePath("GravityComponent")
+look_around_component = NodePath("LookAroundComponent")
+stamina_component = NodePath("StaminaComponent")
+inventory_controler = NodePath("InventoryController")
+interactor = NodePath("Interactor")
+player_stats = ExtResource("8_fm80t")
+
+[node name="LookAroundComponent" parent="." node_paths=PackedStringArray("camera", "body") instance=ExtResource("2_p47bc")]
+camera = NodePath("../Camera3D")
+body = NodePath("..")
+max_vertical_range = 55.0
+head_bob_amplitude = 0.15
+head_bob_speed = 0.25
+fov_change = 0.2
+
+[node name="InputComponent" parent="." instance=ExtResource("2_gmlin")]
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("input_component", "stamina_component", "body_to_move") instance=ExtResource("3_lvxji")]
+input_component = NodePath("../InputComponent")
+stamina_component = NodePath("../StaminaComponent")
+body_to_move = NodePath("..")
+
+[node name="GravityComponent" parent="." node_paths=PackedStringArray("body_to_affect") instance=ExtResource("4_lvxji")]
+body_to_affect = NodePath("..")
+gravity_scale = 1.5
+
+[node name="StaminaComponent" parent="." instance=ExtResource("6_h17s1")]
+
+[node name="ConsumeComponent" parent="." node_paths=PackedStringArray("stamina_component", "inventory_controller", "consumable_object_controller") instance=ExtResource("8_ugbui")]
+stamina_component = NodePath("../StaminaComponent")
+inventory_controller = NodePath("../InventoryController")
+consumable_object_controller = NodePath("../Camera3D/ConsumableObjectController")
+
+[node name="InventoryController" parent="." node_paths=PackedStringArray("inventory_ui", "input_component") instance=ExtResource("9_fcs02")]
+inventory_ui = NodePath("../CanvasLayer/InventoryUi")
+input_component = NodePath("../InputComponent")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3961673, -0.3029711)
+
+[node name="ConsumableObjectController" parent="Camera3D" instance=ExtResource("10_fcs02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16611576, -0.049576044, -0.6454928)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="PlayerHand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3714905, 1.1017222, -1.1963911)
+
+[node name="Beacon" parent="." node_paths=PackedStringArray("player", "max_signal_arrow_direction") instance=ExtResource("6_0owmy")]
+player = NodePath("..")
+max_signal_arrow_direction = NodePath("../SearchArrow")
+max_targets = 6
+max_detection_range = 117.0
+
+[node name="SearchArrow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7291922, 0.7304187, -1.6413295)
+
+[node name="Base" type="CSGBox3D" parent="SearchArrow"]
+size = Vector3(0.15, 0.15, 0.5)
+material = SubResource("StandardMaterial3D_h17s1")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="SearchArrow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.34774494)
+radius = 0.15
+material = SubResource("StandardMaterial3D_5gtgg")
+
+[node name="Interactor" parent="." instance=ExtResource("7_5gtgg")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Interactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1512622, 0)
+shape = SubResource("CapsuleShape3D_0owmy")
+
+[node name="PlayerTrigger" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1512622, 0)
+shape = SubResource("CapsuleShape3D_0owmy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BeaconUi" parent="CanvasLayer" node_paths=PackedStringArray("beacon") instance=ExtResource("7_qek5x")]
+beacon = NodePath("../../Beacon")
+
+[node name="InteractableTextUi" parent="CanvasLayer" instance=ExtResource("8_qek5x")]
+visible = false
+
+[node name="InventoryUi" parent="CanvasLayer" instance=ExtResource("14_myrg7")]
+
+[connection signal="interactable_detected" from="Interactor" to="." method="_on_interactor_interactable_detected"]
+[connection signal="interactable_gone" from="Interactor" to="." method="_on_interactor_interactable_gone"]

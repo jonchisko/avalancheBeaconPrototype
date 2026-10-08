@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://cksssv1lm3xgf"]
+
+[ext_resource type="Script" uid="uid://bxkg3mmmli5x0" path="res://scripts/ui/beacon/beacon_ui.gd" id="1_lcx4c"]
+
+[node name="BeaconUi" type="Control"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_lcx4c")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "RadioTransmitters"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SignalLabelContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

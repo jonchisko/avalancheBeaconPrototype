@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://xfunyextmabr"]
+
+[ext_resource type="Shader" uid="uid://bxyiciayeakop" path="res://assets/sahders/cooldown.gdshader" id="1_shwue"]
+[ext_resource type="Texture2D" uid="uid://cqeuon6se4acy" path="res://icon.svg" id="2_2fpq4"]
+[ext_resource type="Script" uid="uid://b4enpiras6100" path="res://scripts/ui/tool/tool_cooldown_icon.gd" id="3_547tn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2fpq4"]
+shader = ExtResource("1_shwue")
+shader_parameter/cooldown_progress = 1.0
+shader_parameter/use_transparency = true
+shader_parameter/transparency_alpha = 0.30000001425
+
+[node name="ToolCooldownIcon" type="TextureRect"]
+material = SubResource("ShaderMaterial_2fpq4")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_2fpq4")
+script = ExtResource("3_547tn")
