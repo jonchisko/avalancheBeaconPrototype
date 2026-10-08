@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalanche rescue", "Avalanche rescue.csproj", "{DF845D69-FD56-4BD4-972E-2DB0E0417EED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF845D69-FD56-4BD4-972E-2DB0E0417EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF845D69-FD56-4BD4-972E-2DB0E0417EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF845D69-FD56-4BD4-972E-2DB0E0417EED}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{DF845D69-FD56-4BD4-972E-2DB0E0417EED}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{DF845D69-FD56-4BD4-972E-2DB0E0417EED}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{DF845D69-FD56-4BD4-972E-2DB0E0417EED}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
