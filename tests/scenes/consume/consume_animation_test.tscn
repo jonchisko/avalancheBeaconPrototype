@@ -1,0 +1,18 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpk4sgjd7hx1e"]
+
+[ext_resource type="PackedScene" uid="uid://dcxfyohal2rh" path="res://scenes/player/player.tscn" id="1_no7uk"]
+[ext_resource type="Script" uid="uid://cu02pdoly71rd" path="res://tests/scenes/consume/consume_animation_test.gd" id="1_o38gs"]
+[ext_resource type="PackedScene" uid="uid://dfmqmj7bfyt" path="res://scenes/managers/inventory/inventory_manager.tscn" id="2_m48u2"]
+[ext_resource type="Script" uid="uid://fcjjklj43yww" path="res://scripts/resources/consumables/consumable.gd" id="3_o38gs"]
+[ext_resource type="Resource" uid="uid://mgvkge1kqrup" path="res://resources/consumables/frutabela_bar.tres" id="4_y3a3s"]
+[ext_resource type="Resource" uid="uid://g6cc2hatmkut" path="res://resources/consumables/radler_isotonic.tres" id="5_2gp6y"]
+[ext_resource type="Resource" uid="uid://dxibpowwhwhv7" path="res://resources/consumables/lasko.tres" id="6_t5ivj"]
+
+[node name="ConsumeAnimationTest" type="Node3D"]
+script = ExtResource("1_o38gs")
+consumable = ExtResource("6_t5ivj")
+
+[node name="Player" parent="." instance=ExtResource("1_no7uk")]
+
+[node name="InventoryManager" parent="." instance=ExtResource("2_m48u2")]
+consumables = Array[ExtResource("3_o38gs")]([ExtResource("4_y3a3s"), ExtResource("5_2gp6y"), ExtResource("6_t5ivj")])

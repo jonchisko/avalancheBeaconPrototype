@@ -1,0 +1,224 @@
+[gd_scene load_steps=27 format=3 uid="uid://bbqi58hqk6mlr"]
+
+[ext_resource type="Script" uid="uid://byiim43us423v" path="res://tests/scenes/skill_shop/skill_shop_test.gd" id="1_r4x38"]
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="2_coavd"]
+[ext_resource type="PackedScene" uid="uid://bosmksn3vuwrs" path="res://scenes/managers/skill_manager.tscn" id="2_jitgy"]
+[ext_resource type="Script" uid="uid://ds1ufuetl814" path="res://scripts/resources/skills/skill.gd" id="3_gilub"]
+[ext_resource type="Resource" uid="uid://ds84qqpt88kom" path="res://resources/skills/stamina/stamina_common.tres" id="4_coavd"]
+[ext_resource type="PackedScene" uid="uid://3y5x6m3axi2g" path="res://scenes/ui/skill_upgrade/skill_shop_ui.tscn" id="4_kxpos"]
+[ext_resource type="Resource" uid="uid://cn040bkacaw06" path="res://resources/skills/stamina/stamina_epic.tres" id="5_1cuxw"]
+[ext_resource type="Resource" uid="uid://mndj377e23nr" path="res://resources/skills/stamina/stamina_rare.tres" id="7_800m5"]
+[ext_resource type="Resource" uid="uid://c2kfaowq5sqta" path="res://resources/skills/stamina/stamina_regen_epic.tres" id="8_eebpy"]
+[ext_resource type="Resource" uid="uid://d0tyvw46k8w1p" path="res://resources/skills/stamina/stamina_regen_rare.tres" id="9_i3e6k"]
+[ext_resource type="Resource" uid="uid://cu5oxdx480j2l" path="res://resources/skills/stamina/stamina_regen_common.tres" id="10_plm25"]
+[ext_resource type="Resource" uid="uid://unmx0xutmojm" path="res://resources/skills/tools/probe/probe_speed_epic.tres" id="11_l3j7l"]
+[ext_resource type="Resource" uid="uid://dxkgwhvviltlf" path="res://resources/skills/tools/probe/probe_speed_rare.tres" id="12_gjvxt"]
+[ext_resource type="Resource" uid="uid://dkr5tsktelohj" path="res://resources/skills/tools/probe/probe_speed_common.tres" id="13_rgfx4"]
+[ext_resource type="Resource" uid="uid://5sa7tp0mdl7m" path="res://resources/skills/movement/walk/walk_speed_common.tres" id="14_mqc8n"]
+[ext_resource type="Resource" uid="uid://c87g7hgoghw5v" path="res://resources/skills/movement/walk/walk_speed_rare.tres" id="15_xqdap"]
+[ext_resource type="Resource" uid="uid://cp16q2ji85fpl" path="res://resources/skills/movement/walk/walk_speed_epic.tres" id="16_w32ef"]
+[ext_resource type="Resource" uid="uid://cw1xjn6vpq0md" path="res://resources/skills/movement/run/run_speed_common.tres" id="17_kn6ub"]
+[ext_resource type="Resource" uid="uid://ckxe028lf0gra" path="res://resources/skills/movement/run/run_speed_rare.tres" id="18_k8ikg"]
+[ext_resource type="Resource" uid="uid://db8a8ak5rtvfi" path="res://resources/skills/movement/run/run_speed_epic.tres" id="19_oyy3m"]
+[ext_resource type="Resource" uid="uid://c4n2f4tk4hyx1" path="res://resources/skills/movement/jump/jump_strength_common.tres" id="20_5hcc3"]
+[ext_resource type="Resource" uid="uid://bdomdufal61k6" path="res://resources/skills/movement/jump/jump_strength_rare.tres" id="21_m13rw"]
+[ext_resource type="Resource" uid="uid://dctomhijlxca3" path="res://resources/skills/movement/jump/jump_strength_epic.tres" id="22_3ps73"]
+[ext_resource type="Resource" uid="uid://bm6yw3qdqpy50" path="res://resources/skills/tools/shovel/shovel_speed_common.tres" id="23_xadku"]
+[ext_resource type="Resource" uid="uid://d1kxpbg5lsy5c" path="res://resources/skills/tools/shovel/shovel_speed_rare.tres" id="24_c132w"]
+[ext_resource type="Resource" uid="uid://dmclp6nagyffd" path="res://resources/skills/tools/shovel/shovel_speed_epic.tres" id="25_pctec"]
+
+[node name="SkillShopTest" type="Control" node_paths=PackedStringArray("skill_manager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_r4x38")
+skill_manager = NodePath("SkillManager")
+player_stats = ExtResource("2_coavd")
+
+[node name="SkillManager" parent="." node_paths=PackedStringArray("skill_shop_ui") instance=ExtResource("2_jitgy")]
+skill_shop_ui = NodePath("../SkillShopUi")
+all_possible_skills = Array[ExtResource("3_gilub")]([ExtResource("4_coavd"), ExtResource("5_1cuxw"), ExtResource("7_800m5"), ExtResource("8_eebpy"), ExtResource("9_i3e6k"), ExtResource("10_plm25"), ExtResource("11_l3j7l"), ExtResource("12_gjvxt"), ExtResource("13_rgfx4"), ExtResource("14_mqc8n"), ExtResource("15_xqdap"), ExtResource("16_w32ef"), ExtResource("17_kn6ub"), ExtResource("18_k8ikg"), ExtResource("19_oyy3m"), ExtResource("20_5hcc3"), ExtResource("21_m13rw"), ExtResource("22_3ps73"), ExtResource("23_xadku"), ExtResource("24_c132w"), ExtResource("25_pctec")])
+number_of_levels = 10
+rerolls = 4
+max_number_of_skills_to_choose = 3
+
+[node name="SkillShopUi" parent="." instance=ExtResource("4_kxpos")]
+visible = false
+layout_mode = 1
+
+[node name="DataContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DataContainer"]
+layout_mode = 2
+
+[node name="PickedSkillsContainer" type="VBoxContainer" parent="DataContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LevelWonButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "LEVEL WON"
+
+[node name="OpenShopButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "OPEN SHOP
+"
+
+[node name="ReRollButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "REROLL"
+
+[node name="NextLevelButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "NextLevel"
+
+[node name="ReRollLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "REROLLS: 10"
+
+[node name="MaxLevels" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "MAX LEVELS: 10"
+
+[node name="Levels" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "LEVEL: 10"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Walk speed base"
+
+[node name="WalkSpeedBaseLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Walk speed"
+
+[node name="WalkSpeedLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Run speed base"
+
+[node name="RunSpeedBaseLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Run speed"
+
+[node name="RunSpeedLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Jump strength base"
+
+[node name="JumpStrengthBaseLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+text = "Jump strength"
+
+[node name="JumpStrengthLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer6"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+text = "Shovel speed base"
+
+[node name="ShovelSpeedBaseLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer7"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+text = "Shovel speed"
+
+[node name="ShovelSpeedLabel" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer8"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/LevelWonButton" to="." method="_on_level_won_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/OpenShopButton" to="." method="_on_open_shop_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ReRollButton" to="." method="_on_re_roll_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]

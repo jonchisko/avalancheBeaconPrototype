@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=3 uid="uid://c4ycy76iqykor"]
+
+[ext_resource type="Script" uid="uid://7undd43iuoos" path="res://tests/scenes/consume/consumable_shop_test.gd" id="1_dl5ll"]
+[ext_resource type="PackedScene" uid="uid://dfmqmj7bfyt" path="res://scenes/managers/inventory/inventory_manager.tscn" id="2_2ysbf"]
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="2_kh68p"]
+[ext_resource type="Script" uid="uid://fcjjklj43yww" path="res://scripts/resources/consumables/consumable.gd" id="3_t66nt"]
+[ext_resource type="Resource" uid="uid://mgvkge1kqrup" path="res://resources/consumables/frutabela_bar.tres" id="4_kh68p"]
+[ext_resource type="PackedScene" uid="uid://bc2a2k6l5pyd5" path="res://scenes/managers/inventory/inventory_controller.tscn" id="4_vi3n2"]
+[ext_resource type="PackedScene" uid="uid://bsni3st1k47w8" path="res://scenes/components/input_component.tscn" id="5_kh68p"]
+[ext_resource type="Resource" uid="uid://dxibpowwhwhv7" path="res://resources/consumables/lasko.tres" id="5_s5qst"]
+[ext_resource type="PackedScene" uid="uid://dhp2h7ldm23n6" path="res://scenes/ui/inventory/inventory_ui.tscn" id="6_s5qst"]
+[ext_resource type="Resource" uid="uid://g6cc2hatmkut" path="res://resources/consumables/radler_isotonic.tres" id="6_xtacy"]
+[ext_resource type="PackedScene" uid="uid://b6iit8278lo1u" path="res://scenes/components/StaminaComponent.tscn" id="7_xuc8b"]
+[ext_resource type="PackedScene" uid="uid://c6g1loek7f5ol" path="res://scenes/components/consume_component.tscn" id="10_xtacy"]
+[ext_resource type="PackedScene" uid="uid://ih31p27a2a11" path="res://scenes/managers/consumable_object_controller.tscn" id="11_xuc8b"]
+
+[node name="ConsumableShopTest" type="Control" node_paths=PackedStringArray("stamina_component", "inventory_manager", "inventory_controller")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dl5ll")
+stamina_component = NodePath("StaminaComponent")
+inventory_manager = NodePath("InventoryManager")
+player_stats = ExtResource("2_kh68p")
+inventory_controller = NodePath("InventoryController")
+consumables = Array[ExtResource("3_t66nt")]([ExtResource("5_s5qst"), ExtResource("4_kh68p"), ExtResource("6_xtacy")])
+
+[node name="StaminaComponent" parent="." instance=ExtResource("7_xuc8b")]
+
+[node name="InventoryManager" parent="." instance=ExtResource("2_2ysbf")]
+consumables = Array[ExtResource("3_t66nt")]([ExtResource("4_kh68p"), ExtResource("6_xtacy"), ExtResource("5_s5qst")])
+
+[node name="InventoryController" parent="." node_paths=PackedStringArray("inventory_ui", "input_component") instance=ExtResource("4_vi3n2")]
+inventory_ui = NodePath("../InventoryUi")
+input_component = NodePath("../InputComponent")
+
+[node name="InputComponent" parent="." instance=ExtResource("5_kh68p")]
+
+[node name="ConsumeComponent" parent="." node_paths=PackedStringArray("stamina_component", "inventory_controller", "consumable_object_controller") instance=ExtResource("10_xtacy")]
+stamina_component = NodePath("../StaminaComponent")
+inventory_controller = NodePath("../InventoryController")
+consumable_object_controller = NodePath("../ConsumableObjectController")
+
+[node name="ConsumableObjectController" parent="." instance=ExtResource("11_xuc8b")]
+
+[node name="InventoryUi" parent="." instance=ExtResource("6_s5qst")]
+layout_mode = 1
+
+[node name="StaminaStatsContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="StaminaStatsContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StaminaStatsContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StaminaStatsContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StaminaStatsContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Stamina"
+
+[node name="StaminaValue" type="Label" parent="StaminaStatsContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="StaminaStatsContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StaminaStatsContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Stamina Regen"
+
+[node name="StaminaRegen" type="Label" parent="StaminaStatsContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100"
+horizontal_alignment = 2
+
+[node name="ShopButtons" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopButtons"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ShopButtons/VBoxContainer"]
+layout_mode = 2
+text = "Get Random Consumable"
+
+[node name="StartRoundButton" type="Button" parent="ShopButtons/VBoxContainer"]
+layout_mode = 2
+text = "Start round"
+
+[node name="EndRoundButon" type="Button" parent="ShopButtons/VBoxContainer"]
+layout_mode = 2
+text = "End round"
+
+[node name="StaminaButtons" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StaminaButtons"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RemoveStaminaButton" type="Button" parent="StaminaButtons/HBoxContainer"]
+layout_mode = 2
+text = "Remove Current Stamina"
+
+[node name="AddStaminaButton" type="Button" parent="StaminaButtons/HBoxContainer"]
+layout_mode = 2
+text = "Add Current Stamina"
+
+[node name="AwardsPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="AwardsLabel" type="Label" parent="AwardsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Awarded consumable"
+
+[connection signal="pressed" from="ShopButtons/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ShopButtons/VBoxContainer/StartRoundButton" to="." method="_on_start_round_button_pressed"]
+[connection signal="pressed" from="ShopButtons/VBoxContainer/EndRoundButon" to="." method="_on_end_round_buton_pressed"]
+[connection signal="pressed" from="StaminaButtons/HBoxContainer/RemoveStaminaButton" to="." method="_on_remove_stamina_button_pressed"]
+[connection signal="pressed" from="StaminaButtons/HBoxContainer/AddStaminaButton" to="." method="_on_add_stamina_button_pressed"]

@@ -1,0 +1,103 @@
+[gd_scene load_steps=18 format=3 uid="uid://cp78v0nmp6jjr"]
+
+[ext_resource type="Script" uid="uid://cavehdp834muh" path="res://tests/scenes/tools/probe/probe_test.gd" id="1_6ws0p"]
+[ext_resource type="PackedScene" uid="uid://dcxfyohal2rh" path="res://scenes/player/player.tscn" id="1_nilb6"]
+[ext_resource type="Script" uid="uid://cbr5p3ymcn7tu" path="res://tests/scenes/tools/probe/tools_controller_adhoc_test.gd" id="2_phru6"]
+[ext_resource type="PackedScene" uid="uid://bnu8d3n0yymiq" path="res://scenes/objects/tools/probe_main.tscn" id="2_sxbhg"]
+[ext_resource type="PackedScene" uid="uid://dfmqmj7bfyt" path="res://scenes/managers/inventory/inventory_manager.tscn" id="2_vrt5x"]
+[ext_resource type="Script" uid="uid://fcjjklj43yww" path="res://scripts/resources/consumables/consumable.gd" id="3_7i2nr"]
+[ext_resource type="Resource" uid="uid://c7p3jvh0ea7c7" path="res://resources/player/player_stats.tres" id="3_tc43b"]
+[ext_resource type="Resource" uid="uid://mgvkge1kqrup" path="res://resources/consumables/frutabela_bar.tres" id="4_iudil"]
+[ext_resource type="PackedScene" uid="uid://bfqnebq1su7u3" path="res://scenes/ui/tool/tool_picker_ui.tscn" id="4_tc43b"]
+[ext_resource type="Resource" uid="uid://dxibpowwhwhv7" path="res://resources/consumables/lasko.tres" id="5_8awq4"]
+[ext_resource type="Resource" uid="uid://g6cc2hatmkut" path="res://resources/consumables/radler_isotonic.tres" id="6_udapo"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_phru6"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6ma7r"]
+sky_material = SubResource("ProceduralSkyMaterial_phru6")
+
+[sub_resource type="Environment" id="Environment_6ws0p"]
+background_mode = 2
+sky = SubResource("Sky_6ma7r")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_85uvb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxbhg"]
+albedo_color = Color(7.219613e-08, 0.21102887, 0.22722405, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tc43b"]
+material = SubResource("StandardMaterial3D_sxbhg")
+size = Vector2(50, 50)
+
+[node name="ProbeTest" type="Node3D" node_paths=PackedStringArray("inventory_manager", "player")]
+script = ExtResource("1_6ws0p")
+inventory_manager = NodePath("InventoryManager")
+player = NodePath("Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6ws0p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="InventoryManager" parent="." instance=ExtResource("2_vrt5x")]
+consumables = Array[ExtResource("3_7i2nr")]([ExtResource("4_iudil"), ExtResource("5_8awq4"), ExtResource("6_udapo")])
+
+[node name="Player" parent="." instance=ExtResource("1_nilb6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70313597, 0)
+
+[node name="PlayerHand" parent="Player" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48009506, 1.1017222, -1.1984189)
+
+[node name="ToolPickerUi" parent="Player/CanvasLayer" index="0" instance=ExtResource("4_tc43b")]
+
+[node name="Tools" type="Node3D" parent="Player" node_paths=PackedStringArray("input_component", "tool_picker_ui", "probe_tool")]
+script = ExtResource("2_phru6")
+input_component = NodePath("../InputComponent")
+tool_picker_ui = NodePath("../CanvasLayer/ToolPickerUi")
+probe_tool = NodePath("ProbeMain")
+
+[node name="ProbeMain" parent="Player/Tools" node_paths=PackedStringArray("tools_parent", "player_hand", "stamina_component", "input_component") instance=ExtResource("2_sxbhg")]
+visible = false
+tools_parent = NodePath("..")
+player_hand = NodePath("../../PlayerHand")
+stamina_component = NodePath("../../StaminaComponent")
+input_component = NodePath("../../InputComponent")
+player_stats = ExtResource("3_tc43b")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_85uvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_tc43b")
+skeleton = NodePath("../..")
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.843494, 4.5590496, 12.727964)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.647443, 0, -3.763932)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58844, 11.330826)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.940966, 1.532496, 0)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.827833, 1.1237774, -15.141097)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5249629, -14.177847)
+
+[editable path="Player"]

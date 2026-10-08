@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj0dsbsjt5j8u"]
+
+[ext_resource type="Script" uid="uid://cn4476soirdmh" path="res://tests/scenes/skill_shop/skill_element_test.gd" id="1_i1ro7"]
+
+[node name="SkillElementTest" type="HBoxContainer"]
+theme_override_constants/separation = 8
+alignment = 1
+script = ExtResource("1_i1ro7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "SkillName"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+text = "100"
